@@ -29,11 +29,11 @@ describe 'ActiveRecord Obstacle Course, Week 4' do
     orders = Order.all.map do |order|
       order if order.user_id != @user_2.id
     end.select{|i| !i.nil?}
-    total_sales = orders.map(&:amount).inject(:+)
+    # total_sales = orders.map(&:amount).inject(:+)
     # -----------------------------------------------------------
 
     # ------------------ Using ActiveRecord ---------------------
-    # Solution goes here
+    total_sales = Order.where.not(user_id: @user_2.id).sum(:amount)
     # -----------------------------------------------------------
 
     # Expectation
