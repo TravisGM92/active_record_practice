@@ -32,7 +32,7 @@ describe 'ActiveRecord Obstacle Course, Week 3' do
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-  
+
     # Expectation
     expect(users).to eq(expected_result)
   end
@@ -41,15 +41,15 @@ describe 'ActiveRecord Obstacle Course, Week 3' do
     expected_result = ['Abercrombie', 'Giorgio Armani', 'J.crew', 'Fox']
 
     # ----------------------- Using Ruby -------------------------
-    names = Order.last.items.all.map(&:name)
+    # names = Order.last.items.all.map(&:name)
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    names = Order.last.items.distinct.pluck(:name)
     # ------------------------------------------------------------
 
     # Expectation
-    expect(names.sort).to eq(expected_result.sort)
+    expect(names).to eq(expected_result.sort)
   end
 
   it '18. returns the names of items for a users order' do
