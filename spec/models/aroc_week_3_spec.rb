@@ -96,11 +96,12 @@ describe 'ActiveRecord Obstacle Course, Week 3' do
       order if order.user_id == @user_3.id
     end.select{|i| !i.nil?}
 
-    average = (orders.map(&:amount).inject(:+)) / (orders.count)
+    # average = (orders.map(&:amount).inject(:+)) / (orders.count)
     # -----------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    average = Order.where(user_id: @user_3.id).average(:amount)
+
     # ------------------------------------------------------------
 
     # Expectation
