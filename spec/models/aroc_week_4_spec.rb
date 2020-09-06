@@ -81,15 +81,16 @@ describe 'ActiveRecord Obstacle Course, Week 4' do
     # ----------------------- Using Ruby -------------------------
     items = Item.all
 
-    ordered_items = items.map do |item|
-      item if item.orders.present?
-    end
+    # ordered_items = items.map do |item|
+    #   item if item.orders.present?
+    # end
 
-    ordered_items = ordered_items.compact
+    # ordered_items = ordered_items.compact
     # ------------------------------------------------------------
 
     # ------------------ ActiveRecord Solution ----------------------
-    # Solution goes here
+    items = Item.joins(:orders).group(:id).count
+    ordered_items = Item.where(id: items.keys)
     # ---------------------------------------------------------------
 
     # Expectations
