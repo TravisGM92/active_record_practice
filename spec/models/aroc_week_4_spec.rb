@@ -63,11 +63,11 @@ describe 'ActiveRecord Obstacle Course, Week 4' do
     # ------------------ Inefficient Solution -------------------
     orders = Order.where(user: @user_2)
     order_ids = OrderItem.where(order_id: orders, item: @item_4).map(&:order_id)
-    orders = order_ids.map { |id| Order.find(id) }
+    # orders = order_ids.map { |id| Order.find(id) }
     # -----------------------------------------------------------
 
     # ------------------ Improved Solution ----------------------
-    #  Solution goes here
+    orders = Order.where(user_id: @user_2.id).joins(:items).where(items: {id: @item_4.id})
     # -----------------------------------------------------------
 
     # Expectation
